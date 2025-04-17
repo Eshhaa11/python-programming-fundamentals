@@ -4,3 +4,9 @@ def add_item():
     name = input("Enter an item name: ")
     quantity = input("Enter the quanity: ")
     price = input("Enter price: ")
+
+    item = {
+        'name': name,
+        'quantity': quantity,
+        'price': price
+    }
