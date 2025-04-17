@@ -17,3 +17,11 @@ def add_item():
 def remove_item() :
     name = input("Enter the the item to remove: ")
     found = False
+    for item in inventory:
+        if item['name'].lower() == name.lower():
+            inventory.remove(item)
+            print(f"{name} has been removed from inventory.\n")
+            found = True
+            break
+    if not found:
+        print(f"{name} not found in inventory.\n")
