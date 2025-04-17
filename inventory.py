@@ -1,5 +1,3 @@
-
-
 inventory = []
 
 def load_inventory():
@@ -12,7 +10,6 @@ def load_inventory():
         
         pass
 
-# Save inventory to file
 def save_inventory():
     with open("inventory.txt", "w") as file:
         for item in inventory:
