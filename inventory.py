@@ -25,3 +25,12 @@ def remove_item() :
             break
     if not found:
         print(f"{name} not found in inventory.\n")
+
+def display_inventory():
+    if not inventory:
+        print("Inventory is empty.\n")
+        return
+    print("Current Inventory:")
+    for item in inventory:
+        print(f"Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}")
+    print()
