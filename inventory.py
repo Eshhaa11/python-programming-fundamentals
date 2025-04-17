@@ -10,3 +10,6 @@ def add_item():
         'quantity': quantity,
         'price': price
     }
+
+    inventory.append(item)
+    print(f"{name} has been added to inventory.\n")
