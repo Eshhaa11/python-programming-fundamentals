@@ -13,3 +13,6 @@ def add_item():
 
     inventory.append(item)
     print(f"{name} has been added to inventory.\n")
+
+def remove_item() :
+    name = input("Enter the the item to remove: ")
