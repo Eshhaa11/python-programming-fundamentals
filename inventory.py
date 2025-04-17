@@ -16,3 +16,4 @@ def add_item():
 
 def remove_item() :
     name = input("Enter the the item to remove: ")
+    found = False
