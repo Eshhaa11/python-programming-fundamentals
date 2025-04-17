@@ -34,3 +34,14 @@ def display_inventory():
     for item in inventory:
         print(f"Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}")
     print()
+
+def search_item():
+    name = input("Enter the name of the item to search: ")
+    found = False
+    for item in inventory:
+        if item['name'].lower() == name.lower():
+            print(f"Found: Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}\n")
+            found = True
+            break
+    if not found:
+        print(f"{name} not found in inventory.\n")
