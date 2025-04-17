@@ -1,61 +1,71 @@
+
+
 inventory = []
 
+def load_inventory():
+    try:
+        with open("inventory.txt", "r") as file:
+            for line in file:
+                name, quantity, price = line.strip().split(",")
+                inventory.append({'name': name, 'quantity': quantity, 'price': price})
+    except FileNotFoundError:
+        
+        pass
+
+# Save inventory to file
+def save_inventory():
+    with open("inventory.txt", "w") as file:
+        for item in inventory:
+            file.write(f"{item['name']},{item['quantity']},{item['price']}\n")
+
+
 def add_item():
-    name = input("Enter an item name: ")
-    quantity = input("Enter the quanity: ")
+    name = input("Enter item name: ")
+    quantity = input("Enter quantity: ")
     price = input("Enter price: ")
+    inventory.append({'name': name, 'quantity': quantity, 'price': price})
+    save_inventory()
+    print(f"{name} added to inventory!")
 
-    item = {
-        'name': name,
-        'quantity': quantity,
-        'price': price
-    }
 
-    inventory.append(item)
-    print(f"{name} has been added to inventory.\n")
-
-def remove_item() :
-    name = input("Enter the the item to remove: ")
-    found = False
+def remove_item():
+    name = input("Enter item name to remove: ")
     for item in inventory:
         if item['name'].lower() == name.lower():
             inventory.remove(item)
-            print(f"{name} has been removed from inventory.\n")
-            found = True
-            break
-    if not found:
-        print(f"{name} not found in inventory.\n")
+            save_inventory()
+            print(f"{name} removed from inventory!")
+            return
+    print(f"{name} not found.")
 
 def display_inventory():
     if not inventory:
-        print("Inventory is empty.\n")
-        return
-    print("Current Inventory:")
-    for item in inventory:
-        print(f"Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}")
-    print()
+        print("Inventory is empty.")
+    else:
+        print("Inventory List:")
+        for item in inventory:
+            print(f"Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}")
+
 
 def search_item():
-    name = input("Enter the name of the item to search: ")
-    found = False
+    name = input("Enter item name to search: ")
     for item in inventory:
         if item['name'].lower() == name.lower():
-            print(f"Found: Name: {item['name']}, Quantity: {item['quantity']}, Price: {item['price']}\n")
-            found = True
-            break
-    if not found:
-        print(f"{name} not found in inventory.\n")
+            print(f"Found: {item}")
+            return
+    print(f"{name} not found.")
 
 def main():
+    load_inventory()
     while True:
-        print("=== Inventory Management System ===")
+        print("\n=== Inventory Menu ===")
         print("1. Add Item")
         print("2. Remove Item")
         print("3. Display Inventory")
         print("4. Search Item")
         print("5. Exit")
 
-        choice = input("Enter your choice (1-5): ")
+        choice = input("Choose an option (1-5): ")
 
         if choice == '1':
             add_item()
@@ -66,10 +76,11 @@ def main():
         elif choice == '4':
             search_item()
         elif choice == '5':
-            print("Exiting Inventory Management System.")
+            print("Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter a number from 1 to 5.\n")
+            print("Invalid choice. Try again.")
+
 
 if __name__ == "__main__":
     main()
